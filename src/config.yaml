@@ -1,0 +1,47 @@
+# ============================================
+# Data configuration
+# ============================================
+data:
+  fname: "Subscription_Boxes"      # your dataset name (jsonl.gz)
+  test_size: 0.2
+  seed: 42
+
+# ============================================
+# Model configuration (LightKG)
+# ============================================
+model:
+  embed_dim: 64
+  n_layer: 2
+  l2_reg: 1e-4
+
+  # contrastive loss weights
+  beta_user: 1e-3
+  beta_item: 1e-3
+
+# ============================================
+# Training configuration
+# ============================================
+train:
+  lr: 1e-3
+  batch_size: 1024
+  epoch_num: 100
+
+  num_batches_per_epoch: 1000
+  eval_interval: 1
+  patience: 10
+
+  # how many user-user / item-item pairs to sample for contrastive loss
+  num_user_pairs: 512
+  num_item_pairs: 512
+
+# ============================================
+# Evaluation configuration
+# ============================================
+eval:
+  k: 10      # NDCG@k, Hit@k
+
+# ============================================
+# Output / save paths
+# ============================================
+path:
+  best_model_path: "best_lightkg.pt"
