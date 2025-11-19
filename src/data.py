@@ -108,9 +108,6 @@ class LightKGDataLoader:
         item_num = len(item2id)
         store_num = len(store2id)
 
-        # store id mapping을 위해 meta_df를 저장해두기 (item, store, idx 매핑용)
-        self.meta_df = meta_df  # filtered 버전으로 교체
-
         train_df, test_df = train_test_split(
             df[["user_idx", "item_idx"]],
             test_size=self.test_size,
