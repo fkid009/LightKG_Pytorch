@@ -95,6 +95,7 @@ class LightKGDataLoader:
         inter_items = set(df["item"].unique())
         meta_df = meta_df[meta_df["item"].isin(inter_items)]
         meta_df = meta_df.drop_duplicates(subset=["item", "store"])
+        self.meta_df = meta_df
 
         # id mappings
         user2id = {u: idx for idx, u in enumerate(df["user"].unique())}
@@ -107,6 +108,9 @@ class LightKGDataLoader:
         user_num = len(user2id)
         item_num = len(item2id)
         store_num = len(store2id)
+
+        # # store id mapping을 위해 meta_df를 저장해두기 (item, store, idx 매핑용)
+        # self.meta_df = meta_df  # filtered 버전으로 교체
 
         train_df, test_df = train_test_split(
             df[["user_idx", "item_idx"]],
